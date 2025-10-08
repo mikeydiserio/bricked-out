@@ -1,16 +1,20 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { Save, FolderOpen } from "lucide-react"
-import { MaybeTooltip } from "./maybe-tooltip"
+import { FolderOpen, Save } from "lucide-react";
+import type React from "react";
+import { MaybeTooltip } from "./maybe-tooltip";
 
 interface FileControlsProps {
-  onSave: () => void
-  onLoad: () => void
-  isMobile: boolean
+  onSave: () => void;
+  onLoad: () => void;
+  isMobile: boolean;
 }
 
-export const FileControls: React.FC<FileControlsProps> = ({ onSave, onLoad, isMobile }) => {
+export const FileControls: React.FC<FileControlsProps> = ({
+  onSave,
+  onLoad,
+  isMobile,
+}) => {
   return (
     <div className="flex gap-3 items-center">
       <MaybeTooltip text="Load" isMobile={isMobile}>
@@ -32,5 +36,5 @@ export const FileControls: React.FC<FileControlsProps> = ({ onSave, onLoad, isMo
         </button>
       </MaybeTooltip>
     </div>
-  )
-}
+  );
+};

@@ -1,82 +1,91 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect } from "react"
-import { Trash2, Clock, RefreshCw } from "lucide-react"
-import { getCreations } from "@/lib/actions/get-creations"
-import { deleteCreation } from "@/lib/actions/delete-creation"
-import type { SavedCreation } from "@/lib/types"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { deleteCreation } from "@/lib/actions/delete-creation";
+import { getCreations } from "@/lib/actions/get-creations";
+import type { SavedCreation } from "@/lib/types";
+import { Clock, RefreshCw, Trash2 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface LoadModalProps {
-  isOpen: boolean
-  onClose: () => void
-  onLoad: (creation: SavedCreation) => void
+  isOpen: boolean;
+  onClose: () => void;
+  onLoad: (creation: SavedCreation) => void;
 }
 
-export const LoadModal: React.FC<LoadModalProps> = ({ isOpen, onClose, onLoad }) => {
-  const [creations, setCreations] = useState<SavedCreation[]>([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState("")
-  const [isDeleting, setIsDeleting] = useState<string | null>(null)
+export const LoadModal: React.FC<LoadModalProps> = ({
+  isOpen,
+  onClose,
+  onLoad,
+}) => {
+  const [creations, setCreations] = useState<SavedCreation[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [isDeleting, setIsDeleting] = useState<string | null>(null);
 
   useEffect(() => {
     if (isOpen) {
-      loadCreations()
+      loadCreations();
     }
-  }, [isOpen])
+  }, [isOpen]);
 
   const loadCreations = async () => {
-    setIsLoading(true)
-    setError("")
+    setIsLoading(true);
+    setError("");
 
     try {
-      const result = await getCreations(20, 0)
+      const result = await getCreations(20, 0);
 
       if (result.success) {
-        setCreations(result.creations || [])
+        setCreations(result.creations || []);
       } else {
-        setError(result.message || "Failed to load creations")
+        setError(result.message || "Failed to load creations");
       }
     } catch (error) {
-      setError("An error occurred while loading creations")
+      setError("An error occurred while loading creations");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleDelete = async (id: string, e: React.MouseEvent) => {
-    e.stopPropagation()
+    e.stopPropagation();
 
-    if (isDeleting) return
+    if (isDeleting) return;
 
     if (!confirm("Are you sure you want to delete this creation?")) {
-      return
+      return;
     }
 
-    setIsDeleting(id)
+    setIsDeleting(id);
 
     try {
-      const result = await deleteCreation(id)
+      const result = await deleteCreation(id);
 
       if (result.success) {
         // Remove from local state
-        setCreations(creations.filter((c) => c.id !== id))
+        setCreations(creations.filter((c) => c.id !== id));
       } else {
-        alert(result.message || "Failed to delete creation")
+        alert(result.message || "Failed to delete creation");
       }
     } catch (error) {
-      alert("An error occurred while deleting the creation")
+      alert("An error occurred while deleting the creation");
     } finally {
-      setIsDeleting(null)
+      setIsDeleting(null);
     }
-  }
+  };
 
   const formatDate = (timestamp: number) => {
-    return new Date(timestamp).toLocaleString()
-  }
+    return new Date(timestamp).toLocaleString();
+  };
 
   // Skeleton loading component
   const CreationSkeleton = () => (
@@ -91,13 +100,15 @@ export const LoadModal: React.FC<LoadModalProps> = ({ isOpen, onClose, onLoad })
       </div>
       <div className="mt-2 h-4 bg-gray-200 rounded w-1/4"></div>
     </div>
-  )
+  );
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-2xl max-h-[80vh] flex flex-col rounded-[28px]">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold">Load Creation</DialogTitle>
+          <DialogTitle className="text-2xl font-bold">
+            Load Creation
+          </DialogTitle>
           <div className="flex justify-between items-center mt-2">
             <p className="text-gray-600">Select a creation to load</p>
             <Button
@@ -107,13 +118,21 @@ export const LoadModal: React.FC<LoadModalProps> = ({ isOpen, onClose, onLoad })
               className="flex items-center gap-1 text-gray-600 hover:text-gray-900"
               disabled={isLoading}
             >
-              <RefreshCw className={`w-4 h-4 stroke-[1.5] ${isLoading ? "animate-spin" : ""}`} />
+              <RefreshCw
+                className={`w-4 h-4 stroke-[1.5] ${
+                  isLoading ? "animate-spin" : ""
+                }`}
+              />
               Refresh
             </Button>
           </div>
         </DialogHeader>
 
-        {error && <div className="mb-4 p-3 bg-red-100 text-red-800 rounded-lg">{error}</div>}
+        {error && (
+          <div className="mb-4 p-3 bg-red-100 text-red-800 rounded-lg">
+            {error}
+          </div>
+        )}
 
         <div className="overflow-y-auto flex-grow">
           {isLoading ? (
@@ -123,7 +142,9 @@ export const LoadModal: React.FC<LoadModalProps> = ({ isOpen, onClose, onLoad })
               <CreationSkeleton />
             </div>
           ) : creations.length === 0 ? (
-            <div className="text-center py-10 text-gray-500">No saved creations found</div>
+            <div className="text-center py-10 text-gray-500">
+              No saved creations found
+            </div>
           ) : (
             <div className="grid grid-cols-1 gap-3">
               {creations.map((creation) => (
@@ -152,7 +173,8 @@ export const LoadModal: React.FC<LoadModalProps> = ({ isOpen, onClose, onLoad })
                     <span>Updated: {formatDate(creation.updatedAt)}</span>
                   </div>
                   <div className="mt-2 text-sm text-gray-600">
-                    {creation.bricks.length} {creation.bricks.length === 1 ? "brick" : "bricks"}
+                    {creation.bricks.length}{" "}
+                    {creation.bricks.length === 1 ? "brick" : "bricks"}
                   </div>
                 </div>
               ))}
@@ -161,5 +183,5 @@ export const LoadModal: React.FC<LoadModalProps> = ({ isOpen, onClose, onLoad })
         </div>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};

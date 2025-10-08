@@ -1,18 +1,21 @@
-"use client"
+"use client";
 
-import type React from "react"
-import type { Brick } from "./v0-blocks/events"
-import { LargePlane } from "./large-plane"
-import { Platform } from "./platform"
-import { Block } from "./block"
-import { LightingSetup } from "./scene/lighting-setup"
+import type React from "react";
+import { Block } from "./block";
+import { LargePlane } from "./large-plane";
+import { Platform } from "./platform";
+import { LightingSetup } from "./scene/lighting-setup";
+import type { Brick } from "./v0-blocks/events";
 
 interface AiSceneProps {
-  bricks: Brick[]
-  offset?: [number, number, number]
+  bricks: Brick[];
+  offset?: [number, number, number];
 }
 
-export const AiScene: React.FC<AiSceneProps> = ({ bricks, offset = [15, 0, 0] }) => {
+export const AiScene: React.FC<AiSceneProps> = ({
+  bricks,
+  offset = [15, 0, 0],
+}) => {
   return (
     <group position={offset}>
       <LargePlane />
@@ -32,5 +35,5 @@ export const AiScene: React.FC<AiSceneProps> = ({ bricks, offset = [15, 0, 0] })
 
       <LightingSetup />
     </group>
-  )
-}
+  );
+};

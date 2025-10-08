@@ -1,16 +1,21 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { ArrowLeftRight, ChevronDown } from "lucide-react"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { SimpleTooltip } from "../simple-tooltip"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ArrowLeftRight, ChevronDown } from "lucide-react";
+import type React from "react";
+import { SimpleTooltip } from "../simple-tooltip";
 
 interface DimensionControlsProps {
-  width: number
-  height: number
-  onWidthChange: (width: number) => void
-  onHeightChange: (height: number) => void
-  isMobile: boolean
+  width: number;
+  height: number;
+  onWidthChange: (width: number) => void;
+  onHeightChange: (height: number) => void;
+  isMobile: boolean;
 }
 
 export const DimensionControls: React.FC<DimensionControlsProps> = ({
@@ -21,13 +26,13 @@ export const DimensionControls: React.FC<DimensionControlsProps> = ({
   isMobile,
 }) => {
   // Create an array of options for the dropdowns (1-20)
-  const dimensionOptions = Array.from({ length: 20 }, (_, i) => i + 1)
+  const dimensionOptions = Array.from({ length: 20 }, (_, i) => i + 1);
 
   // Function to swap width and height
   const handleSwapDimensions = () => {
-    onWidthChange(height)
-    onHeightChange(width)
-  }
+    onWidthChange(height);
+    onHeightChange(width);
+  };
 
   if (isMobile) {
     return (
@@ -45,7 +50,10 @@ export const DimensionControls: React.FC<DimensionControlsProps> = ({
             sideOffset={5}
           >
             {dimensionOptions.map((option) => (
-              <DropdownMenuItem key={option} onSelect={() => onWidthChange(option)}>
+              <DropdownMenuItem
+                key={option}
+                onSelect={() => onWidthChange(option)}
+              >
                 {option}
               </DropdownMenuItem>
             ))}
@@ -73,14 +81,17 @@ export const DimensionControls: React.FC<DimensionControlsProps> = ({
             sideOffset={5}
           >
             {dimensionOptions.map((option) => (
-              <DropdownMenuItem key={option} onSelect={() => onHeightChange(option)}>
+              <DropdownMenuItem
+                key={option}
+                onSelect={() => onHeightChange(option)}
+              >
                 {option}
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-    )
+    );
   }
 
   return (
@@ -99,7 +110,10 @@ export const DimensionControls: React.FC<DimensionControlsProps> = ({
             sideOffset={5}
           >
             {dimensionOptions.map((option) => (
-              <DropdownMenuItem key={option} onSelect={() => onWidthChange(option)}>
+              <DropdownMenuItem
+                key={option}
+                onSelect={() => onWidthChange(option)}
+              >
                 {option}
               </DropdownMenuItem>
             ))}
@@ -131,7 +145,10 @@ export const DimensionControls: React.FC<DimensionControlsProps> = ({
             sideOffset={5}
           >
             {dimensionOptions.map((option) => (
-              <DropdownMenuItem key={option} onSelect={() => onHeightChange(option)}>
+              <DropdownMenuItem
+                key={option}
+                onSelect={() => onHeightChange(option)}
+              >
                 {option}
               </DropdownMenuItem>
             ))}
@@ -139,5 +156,5 @@ export const DimensionControls: React.FC<DimensionControlsProps> = ({
         </DropdownMenu>
       </SimpleTooltip>
     </div>
-  )
-}
+  );
+};

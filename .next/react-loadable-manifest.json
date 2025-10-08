@@ -1,1 +1,10 @@
-{}
+{
+  "node_modules/.pnpm/@react-three+drei@10.7.6_@react-three+fiber@9.3.0_a3e8c46c2d7eb4c135a6b2565e362a90__@ty_24e9010a48cec72c85d6110c0b3b6092/node_modules/@react-three/drei/core/VideoTexture.js -> hls.js": {
+    "id": "node_modules/.pnpm/@react-three+drei@10.7.6_@react-three+fiber@9.3.0_a3e8c46c2d7eb4c135a6b2565e362a90__@ty_24e9010a48cec72c85d6110c0b3b6092/node_modules/@react-three/drei/core/VideoTexture.js -> hls.js",
+    "files": []
+  },
+  "node_modules/.pnpm/@react-three+drei@10.7.6_@react-three+fiber@9.3.0_a3e8c46c2d7eb4c135a6b2565e362a90__@ty_24e9010a48cec72c85d6110c0b3b6092/node_modules/@react-three/drei/web/FaceLandmarker.js -> @mediapipe/tasks-vision": {
+    "id": "node_modules/.pnpm/@react-three+drei@10.7.6_@react-three+fiber@9.3.0_a3e8c46c2d7eb4c135a6b2565e362a90__@ty_24e9010a48cec72c85d6110c0b3b6092/node_modules/@react-three/drei/web/FaceLandmarker.js -> @mediapipe/tasks-vision",
+    "files": []
+  }
+}

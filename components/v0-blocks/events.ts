@@ -1,14 +1,14 @@
-import type { Dispatch, SetStateAction } from "react"
+import type { Dispatch, SetStateAction } from "react";
 
 // Define types for our brick and history
 export type Brick = {
-  color: string
-  position: [number, number, number]
-  width: number
-  height: number
-}
+  color: string;
+  position: [number, number, number];
+  width: number;
+  height: number;
+};
 
-export type BrickHistory = Brick[][]
+export type BrickHistory = Brick[][];
 
 // Event handlers
 export const handleAddBrick = (
@@ -18,15 +18,15 @@ export const handleAddBrick = (
   history: BrickHistory,
   historyIndex: number,
   setHistory: Dispatch<SetStateAction<BrickHistory>>,
-  setHistoryIndex: Dispatch<SetStateAction<number>>,
+  setHistoryIndex: Dispatch<SetStateAction<number>>
 ) => {
-  const newBricks = [...bricks, brick]
-  setBricks(newBricks)
-  const newHistory = history.slice(0, historyIndex + 1)
-  newHistory.push(newBricks)
-  setHistory(newHistory)
-  setHistoryIndex(historyIndex + 1)
-}
+  const newBricks = [...bricks, brick];
+  setBricks(newBricks);
+  const newHistory = history.slice(0, historyIndex + 1);
+  newHistory.push(newBricks);
+  setHistory(newHistory);
+  setHistoryIndex(historyIndex + 1);
+};
 
 export const handleDeleteBrick = (
   index: number,
@@ -35,15 +35,15 @@ export const handleDeleteBrick = (
   history: BrickHistory,
   historyIndex: number,
   setHistory: Dispatch<SetStateAction<BrickHistory>>,
-  setHistoryIndex: Dispatch<SetStateAction<number>>,
+  setHistoryIndex: Dispatch<SetStateAction<number>>
 ) => {
-  const newBricks = bricks.filter((_, i) => i !== index)
-  setBricks(newBricks)
-  const newHistory = history.slice(0, historyIndex + 1)
-  newHistory.push(newBricks)
-  setHistory(newHistory)
-  setHistoryIndex(historyIndex + 1)
-}
+  const newBricks = bricks.filter((_, i) => i !== index);
+  setBricks(newBricks);
+  const newHistory = history.slice(0, historyIndex + 1);
+  newHistory.push(newBricks);
+  setHistory(newHistory);
+  setHistoryIndex(historyIndex + 1);
+};
 
 export const handleUpdateBrick = (
   index: number,
@@ -53,52 +53,57 @@ export const handleUpdateBrick = (
   history: BrickHistory,
   historyIndex: number,
   setHistory: Dispatch<SetStateAction<BrickHistory>>,
-  setHistoryIndex: Dispatch<SetStateAction<number>>,
+  setHistoryIndex: Dispatch<SetStateAction<number>>
 ) => {
-  const newBricks = bricks.map((brick, i) => (i === index ? { ...brick, position: newPosition } : brick))
-  setBricks(newBricks)
-  const newHistory = history.slice(0, historyIndex + 1)
-  newHistory.push(newBricks)
-  setHistory(newHistory)
-  setHistoryIndex(historyIndex + 1)
-}
+  const newBricks = bricks.map((brick, i) =>
+    i === index ? { ...brick, position: newPosition } : brick
+  );
+  setBricks(newBricks);
+  const newHistory = history.slice(0, historyIndex + 1);
+  newHistory.push(newBricks);
+  setHistory(newHistory);
+  setHistoryIndex(historyIndex + 1);
+};
 
 export const handleUndo = (
   historyIndex: number,
   setHistoryIndex: Dispatch<SetStateAction<number>>,
   history: BrickHistory,
-  setBricks: Dispatch<SetStateAction<Brick[]>>,
+  setBricks: Dispatch<SetStateAction<Brick[]>>
 ) => {
   if (historyIndex > 0) {
-    const newIndex = historyIndex - 1
-    setHistoryIndex(newIndex)
-    setBricks(history[newIndex])
+    const newIndex = historyIndex - 1;
+    setHistoryIndex(newIndex);
+    setBricks(history[newIndex]);
   }
-}
+};
 
 export const handleRedo = (
   historyIndex: number,
   setHistoryIndex: Dispatch<SetStateAction<number>>,
   history: BrickHistory,
-  setBricks: Dispatch<SetStateAction<Brick[]>>,
+  setBricks: Dispatch<SetStateAction<Brick[]>>
 ) => {
   if (historyIndex < history.length - 1) {
-    const newIndex = historyIndex + 1
-    setHistoryIndex(newIndex)
-    setBricks(history[newIndex])
+    const newIndex = historyIndex + 1;
+    setHistoryIndex(newIndex);
+    setBricks(history[newIndex]);
   }
-}
+};
 
 export const handleClearSet = (
   setBricks: Dispatch<SetStateAction<Brick[]>>,
   setHistory: Dispatch<SetStateAction<BrickHistory>>,
-  setHistoryIndex: Dispatch<SetStateAction<number>>,
+  setHistoryIndex: Dispatch<SetStateAction<number>>
 ) => {
-  setBricks([])
-  setHistory([[]])
-  setHistoryIndex(0)
-}
+  setBricks([]);
+  setHistory([[]]);
+  setHistoryIndex(0);
+};
 
-export const handlePlayToggle = (isPlaying: boolean, setIsPlaying: Dispatch<SetStateAction<boolean>>) => {
-  setIsPlaying(!isPlaying)
-}
+export const handlePlayToggle = (
+  isPlaying: boolean,
+  setIsPlaying: Dispatch<SetStateAction<boolean>>
+) => {
+  setIsPlaying(!isPlaying);
+};

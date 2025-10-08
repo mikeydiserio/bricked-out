@@ -1,18 +1,24 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { Undo2, Redo2 } from "lucide-react"
-import { MaybeTooltip } from "./maybe-tooltip"
+import { Redo2, Undo2 } from "lucide-react";
+import type React from "react";
+import { MaybeTooltip } from "./maybe-tooltip";
 
 interface HistoryControlsProps {
-  onUndo: () => void
-  onRedo: () => void
-  canUndo: boolean
-  canRedo: boolean
-  isMobile: boolean
+  onUndo: () => void;
+  onRedo: () => void;
+  canUndo: boolean;
+  canRedo: boolean;
+  isMobile: boolean;
 }
 
-export const HistoryControls: React.FC<HistoryControlsProps> = ({ onUndo, onRedo, canUndo, canRedo, isMobile }) => {
+export const HistoryControls: React.FC<HistoryControlsProps> = ({
+  onUndo,
+  onRedo,
+  canUndo,
+  canRedo,
+  isMobile,
+}) => {
   return (
     <div className="flex gap-3">
       <MaybeTooltip text="Undo (⌘+z)" isMobile={isMobile}>
@@ -40,5 +46,5 @@ export const HistoryControls: React.FC<HistoryControlsProps> = ({ onUndo, onRedo
         </button>
       </MaybeTooltip>
     </div>
-  )
-}
+  );
+};

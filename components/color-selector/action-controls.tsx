@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { Play, Trash2 } from "lucide-react"
-import { MaybeTooltip } from "./maybe-tooltip"
+import { Play, Trash2 } from "lucide-react";
+import type React from "react";
+import { MaybeTooltip } from "./maybe-tooltip";
 
 interface ActionControlsProps {
-  onPlayToggle: () => void
-  isPlaying: boolean
-  onClearSet: () => void
-  isMobile: boolean
-  hasBricks: boolean
+  onPlayToggle: () => void;
+  isPlaying: boolean;
+  onClearSet: () => void;
+  isMobile: boolean;
+  hasBricks: boolean;
 }
 
 export const ActionControls: React.FC<ActionControlsProps> = ({
@@ -33,7 +33,11 @@ export const ActionControls: React.FC<ActionControlsProps> = ({
       <MaybeTooltip text="Clear (⌘+Delete)" isMobile={isMobile}>
         <button
           onClick={onClearSet}
-          className={`${hasBricks ? "text-red-400 hover:text-red-300" : "text-gray-500 cursor-not-allowed"} transition-colors`}
+          className={`${
+            hasBricks
+              ? "text-red-400 hover:text-red-300"
+              : "text-gray-500 cursor-not-allowed"
+          } transition-colors`}
           aria-label="Clear Set"
           disabled={!hasBricks}
         >
@@ -41,5 +45,5 @@ export const ActionControls: React.FC<ActionControlsProps> = ({
         </button>
       </MaybeTooltip>
     </div>
-  )
-}
+  );
+};

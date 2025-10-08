@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 /**
  * Checks if the required KV environment variables are set
@@ -6,22 +6,22 @@
  */
 export async function isKvConfigured(): Promise<boolean> {
   try {
-    const hasKvUrl = !!process.env.KV_REST_API_URL
-    const hasKvToken = !!process.env.KV_REST_API_TOKEN
+    const hasKvUrl = !!process.env.KV_REST_API_URL;
+    const hasKvToken = !!process.env.KV_REST_API_TOKEN;
 
     // If both environment variables are present, try to make a simple KV request
     // to verify the connection works
     if (hasKvUrl && hasKvToken) {
-      const { kv } = await import("@vercel/kv")
+      const { kv } = await import("@vercel/kv");
 
       // Try to ping the KV database
-      await kv.ping()
-      return true
+      await kv.ping();
+      return true;
     }
 
-    return false
+    return false;
   } catch (error) {
-    console.error("Error checking KV configuration:", error)
-    return false
+    console.error("Error checking KV configuration:", error);
+    return false;
   }
 }

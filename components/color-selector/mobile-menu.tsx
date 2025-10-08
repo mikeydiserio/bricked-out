@@ -1,16 +1,20 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { Play, Trash2, Save, FolderOpen, Menu } from "lucide-react"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { FolderOpen, Menu, Play, Save, Trash2 } from "lucide-react";
+import type React from "react";
 
 interface MobileMenuProps {
-  onPlayToggle: () => void
-  isPlaying: boolean
-  onSave: () => void
-  onLoad: () => void
-  onClearSet: () => void
-  hasBricks: boolean
+  onPlayToggle: () => void;
+  isPlaying: boolean;
+  onSave: () => void;
+  onLoad: () => void;
+  onClearSet: () => void;
+  hasBricks: boolean;
 }
 
 export const MobileMenu: React.FC<MobileMenuProps> = ({
@@ -25,7 +29,10 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
     <div className="flex items-center">
       <Popover>
         <PopoverTrigger asChild>
-          <button className="text-white hover:text-gray-300 transition-colors" aria-label="Menu">
+          <button
+            className="text-white hover:text-gray-300 transition-colors"
+            aria-label="Menu"
+          >
             <Menu className="w-5 h-5 stroke-[1.5]" />
           </button>
         </PopoverTrigger>
@@ -41,12 +48,18 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
 
             <div className="my-1 border-t border-gray-200"></div>
 
-            <button onClick={onLoad} className="w-full flex items-center gap-2 px-4 py-2 text-left hover:bg-gray-100">
+            <button
+              onClick={onLoad}
+              className="w-full flex items-center gap-2 px-4 py-2 text-left hover:bg-gray-100"
+            >
               <FolderOpen className="w-4 h-4 stroke-[1.5]" />
               <span>Open</span>
             </button>
 
-            <button onClick={onSave} className="w-full flex items-center gap-2 px-4 py-2 text-left hover:bg-gray-100">
+            <button
+              onClick={onSave}
+              className="w-full flex items-center gap-2 px-4 py-2 text-left hover:bg-gray-100"
+            >
               <Save className="w-4 h-4 stroke-[1.5]" />
               <span>Save</span>
             </button>
@@ -56,16 +69,22 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
             <button
               onClick={onClearSet}
               className={`w-full flex items-center gap-2 px-4 py-2 text-left ${
-                hasBricks ? "text-red-600 hover:bg-red-50" : "text-gray-400 cursor-not-allowed"
+                hasBricks
+                  ? "text-red-600 hover:bg-red-50"
+                  : "text-gray-400 cursor-not-allowed"
               }`}
               disabled={!hasBricks}
             >
-              <Trash2 className={`w-4 h-4 stroke-[1.5] ${hasBricks ? "text-red-600" : "text-gray-400"}`} />
+              <Trash2
+                className={`w-4 h-4 stroke-[1.5] ${
+                  hasBricks ? "text-red-600" : "text-gray-400"
+                }`}
+              />
               <span>Clear</span>
             </button>
           </div>
         </PopoverContent>
       </Popover>
     </div>
-  )
-}
+  );
+};
